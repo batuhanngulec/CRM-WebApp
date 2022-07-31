@@ -1,0 +1,14 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.Crm_Sirket>
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="material-icons">business</i>
+    </span>
+    <div class="form-line">
+        <select name="hotel_code" class="form-control" required>
+            @foreach (var hotel in Model)
+            {
+            <option value="@hotel.Sirket_Kod">@hotel.Sirket_Ad</option>
+            }
+        </select>
+    </div>
+</div>

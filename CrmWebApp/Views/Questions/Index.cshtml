@@ -1,0 +1,52 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.Sorular>
+@{
+    SelectList cevapset = ViewBag.CevapSet as SelectList;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hover Rows -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div id="alert_area"></div>
+            <div class="header">
+                <h2 class="col-sm-11">
+                    @RmosCrmWebApp.Resources.HomeTexts.Sorular
+                    <small>Soru example</small>
+                </h2>
+                <div class="col-sm-1">
+                    <a href="@Url.Action("Create","Questions")" class="btn btn-success btn-circle  waves-effect waves-circle waves-float"><i class="material-icons">add</i></a>
+                </div>
+                <hr />
+            </div>
+            <div class="body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Sıra_ID</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Soru_Kodu</th>                            
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Cevap_Set</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Aktiflik</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var que in Model)
+                        {
+                            <tr>
+                                <td class="col-sm-3">@que.SiraID</td>
+                                <td class="col-sm-3">@que.SoruKod</td>                                
+                                @*<td class="col-sm-6">@que.Ad</td>*@
+                                <td class="col-sm-3">@(cevapset.FirstOrDefault(x => x.Value == que.CevapSetID.ToString()).Text)</td>
+                                <td class="col-sm-6">@(que.Aktiflik==true?"Aktif":"Pasif")</td>
+                                <td class="col-sm-6"><a href="@Url.Action("Edit","Questions",new {id= que.SoruID })" class="btn btn-warning btn-circle waves-effect waves-circle waves-float"><i class="material-icons">edit</i></a></td>
+                                <td class="col-sm-6"><a href="@Url.Action("Delete","Questions",new {id= que.SoruID })" onclick="return confirm('Seçtiğiniz bilgiler silinecek! Emin misiniz?')" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Hover Rows -->

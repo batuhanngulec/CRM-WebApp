@@ -1,0 +1,71 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.Anketler
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    YENİ ANKET
+                    <small>Oluştur</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm("Create", "SurveyForms", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+
+
+
+                                <label class="control-label">Anket Tip Adı:</label>
+                                <div class="form-line">
+                                    @Html.DropDownListFor(model => model.AnketTipID, (SelectList)ViewBag.AnketTip, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.AnketTipID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+
+                                <label class="control-label">Anket Kod:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.AnketKod, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.AnketKod, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+
+                                <label class="control-label">Ad</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model=> model.Ad, new { htmlAttributes = new {@class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+                                </div>
+                                
+
+                                <div class="form-line">
+                                    <div>
+                                        <input type="submit" value="Oluştur" class="btn btn-primary" />
+                                        @Html.ActionLink("Geri Dön", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+
+                        @if (ViewBag.result != null)
+                        {
+                            <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@(ViewBag.result[1])</span></h2>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

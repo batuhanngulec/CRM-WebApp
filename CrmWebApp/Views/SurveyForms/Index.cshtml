@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.Anketler>
+@{
+    SelectList anketTip = ViewBag.AnketTip as SelectList;    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hover Rows -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div id="alert_area"></div>
+            <div class="header">
+                <h2 class="col-sm-11">
+                    ANKETLER
+                    <small>Anketleri buradan ekleyebilir ve silebilirsiniz.</small>
+                </h2>
+                <div class="col-sm-1">
+                    <a href="@Url.Action("Create","SurveyForms")" class="btn btn-success btn-circle  waves-effect waves-circle waves-float"><i class="material-icons">add</i></a>
+                </div>
+                <hr />
+            </div>
+            <div class="body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>AnketTipID</th>
+                            <th>AnketKod</th>
+                            <th>Ad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="col-sm-2">@(anketTip.FirstOrDefault(x => x.Value == item.AnketTipID.ToString()).Text)</td>
+                                <td class="col-sm-2">@item.AnketKod</td>
+                                <td class="col-sm-2">@item.Ad</td>
+                                <td class="col-sm-1"><a href="@Url.Action("Delete","SurveyForms",new {id= item.AnketID })" onclick="return confirm('Seçtiğiniz öğe silinecek! Emin misiniz?')" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
+                            </tr>
+
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Hover Rows -->

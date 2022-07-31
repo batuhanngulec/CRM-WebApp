@@ -1,0 +1,6 @@
+E:\Genel RMOS\RMOS CRM ANKET\RmosCrmWebApp\RmosCrmWebApp\obj\Debug\RmosCrmWebApp.Resources.HomeTexts.resources
+E:\Genel RMOS\RMOS CRM ANKET\RmosCrmWebApp\RmosCrmWebApp\obj\Debug\RmosCrmWebApp.Resources.HomeTexts.en.resources
+E:\Genel RMOS\RMOS CRM ANKET\RmosCrmWebApp\RmosCrmWebApp\obj\Debug\CrmWebApp.csproj.GenerateResource.cache
+E:\Genel RMOS\RMOS CRM ANKET\RmosCrmWebApp\RmosCrmWebApp\obj\Debug\CrmWebApp.csproj.CoreCompileInputs.cache
+E:\Genel RMOS\RMOS CRM ANKET\RmosCrmWebApp\RmosCrmWebApp\obj\Debug\RmosCrmWebApp.dll
+E:\Genel RMOS\RMOS CRM ANKET\RmosCrmWebApp\RmosCrmWebApp\obj\Debug\RmosCrmWebApp.pdb

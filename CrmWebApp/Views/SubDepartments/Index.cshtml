@@ -1,0 +1,55 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.AltDepartmanlar>
+@{
+    SelectList deps = ViewBag.Departments as SelectList;
+    SelectList depskod = ViewBag.DepartmentsKod as SelectList;
+    SelectList anketSira = ViewBag.AnketSirasi as SelectList;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hover Rows -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div id="alert_area"></div>
+            <div class="header">
+                <h2 class="col-sm-11">
+                    ALT DEPARTMANLAR
+                    <small>Otel Alt Departmanları</small>
+                </h2>
+                <div class="col-sm-1">
+                    <a href="@Url.Action("Create","SubDepartments")" class="btn btn-success btn-circle  waves-effect waves-circle waves-float"><i class="material-icons">add</i></a>
+                </div>
+                <hr />
+            </div>
+            <div class="body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Alt Departman Kodu</th>
+                            <th>Alt Departman Adı</th>
+                            <th>Bağlı Olduğu Departman</th>
+                            <th>Bağlı Olduğu Departman Kodu</th>
+                            <th>Aktiflik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sub in Model)
+                        {
+                            <tr>
+                                <td class="col-sm-2">@sub.AltDepartmanKod</td>
+                                <td class="col-sm-2">@sub.Ad</td>
+                                <td class="col-sm-3">@deps.FirstOrDefault(x=>Convert.ToInt32(x.Value) == sub.DepartmanID).Text</td>
+                                <td class="col-sm-3">@depskod.FirstOrDefault(x=>Convert.ToInt32(x.Value) == sub.DepartmanID).Text</td>
+                                <td class="col-sm-3">@(sub.Aktiflik==true?"Aktif":"Pasif")</td>
+                                <td class="col-sm-1"><a href="@Url.Action("Edit","SubDepartments",new {id= sub.AltDepartmanID })" class="btn btn-warning btn-circle waves-effect waves-circle waves-float"><i class="material-icons">edit</i></a></td>
+                                <td class="col-sm-1"><a onclick="return confirm('Seçili öğe silinecek! Emin misiniz?')" href="@Url.Action("Delete","SubDepartments",new {id= sub.AltDepartmanID })" onclick="return subfirm('Seçtiğiniz bilgiler silinecek! Emin misiniz?')" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Hover Rows -->

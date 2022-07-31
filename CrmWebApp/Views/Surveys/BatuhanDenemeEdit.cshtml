@@ -1,0 +1,66 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.AnketForm
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="card">
+        <div class="header">
+            <h4 align="center">
+                GÜNCELLEME İŞLEMİ
+            </h4>
+        </div>
+        <div class="body">
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("BatuhanDenemeEdit", "Surveys", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <label for="siraid" class="control-label">@RmosCrmWebApp.Resources.HomeTexts.Anket_Tipleri</label>
+                        </div>
+                        <div class="form-line">
+                            @Html.DropDownListFor(model => model.AnketID, (SelectList)ViewBag.Anketler, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.AnketID, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+
+                        <label class="control-label">@RmosCrmWebApp.Resources.HomeTexts.Departman_Adı</label>
+                        <div class="form-line">
+                            @Html.DropDownListFor(model => model.DepartmanID, (SelectList)ViewBag.DepartmanAdi, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.DepartmanID, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+
+                        <label class="control-label">@RmosCrmWebApp.Resources.HomeTexts.Cevap_Setleri</label>
+                        <div class="form-line">
+                            @Html.DropDownListFor(model => model.SoruID, (SelectList)ViewBag.CevapSetKod, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.SoruID, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+
+                        <label class="control-label">@RmosCrmWebApp.Resources.HomeTexts.Soru_Tipleri</label>
+                        <div class="form-line">
+                            @Html.DropDownListFor(model => model.CevapSetID, (SelectList)ViewBag.SoruKod, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.CevapSetID, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+
+                        <div class="form-line">
+                            <div>
+                                <input type="submit" value="Oluştur" class="btn btn-primary" />
+                                @Html.ActionLink("Geri Dön","BatuhanDeneme")
+                            </div>
+                        </div>
+                    }
+                    @if (ViewBag.result != null)
+                    {
+                        <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@ViewBag.result[1]</span></h2>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

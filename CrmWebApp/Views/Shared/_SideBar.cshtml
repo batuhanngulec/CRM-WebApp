@@ -1,0 +1,175 @@
+﻿<!-- #Top Bar -->
+<section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="img-circle" >
+                <img src="~/Content/images/rmos.png" width="160" height="60" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
+                <div class="email">info@rmosyazilim.com</div>
+                <div class="btn-group user-helper-dropdown">
+                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- #User Info -->
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header">MAIN NAVIGATION</li>
+                
+                <li class="active">
+                    <a href="@Url.Action("Index","Home")">
+                        <i class="material-icons">home</i>
+                        <span>@RmosCrmWebApp.Resources.HomeTexts.Anasayfa</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        @*<span>Anketler</span>*@
+                        <span>@RmosCrmWebApp.Resources.HomeTexts.Anketler</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="@Url.Action("Index","SurveyRecords")">
+                                <i class="material-icons">assignment_turned_in</i>
+                                <span>Resepsiyon Anket Doldurma</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("StartForm","SurveyRecords")">
+                                <i class="material-icons">assignment_turned_in</i>
+                                <span>Müşteri Anket Doldurma</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("BatuhanDeneme","Surveys")">
+                                <i class="material-icons">note_add</i>
+                                <span>Batuhan Anket Oluştur</span>
+                            </a>
+                        </li>
+
+
+
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">assignment</i>
+                                <span>@RmosCrmWebApp.Resources.HomeTexts.Anket_Parametreleri</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="@Url.Action("Index","Questions")">
+                                        <i class="material-icons">help_outline</i><span>@RmosCrmWebApp.Resources.HomeTexts.Sorular</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","Answers")">
+                                        <i class="material-icons">check</i><span>@RmosCrmWebApp.Resources.HomeTexts.Cevaplar</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index","AnswerSets")">
+                                        <i class="material-icons">playlist_add_check</i><span>@RmosCrmWebApp.Resources.HomeTexts.Cevap_Setleri</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index","SurveyForms")">
+                                        <i class="material-icons">stacked_bar_chart</i><span>@RmosCrmWebApp.Resources.HomeTexts.Anketler</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index","SurveyTypes")">
+                                        <i class="material-icons">addchart</i><span>@RmosCrmWebApp.Resources.HomeTexts.Anket_Tipleri</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">settings</i>
+                        <span>@RmosCrmWebApp.Resources.HomeTexts.Genel_Parametreler</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="@Url.Action("Index","Departments")">
+                                <i class="material-icons">group</i> <span>@RmosCrmWebApp.Resources.HomeTexts.Departman</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","SubDepartments")">
+                                <i class="material-icons">people_outline</i> <span>@RmosCrmWebApp.Resources.HomeTexts.Alt_Departmanlar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Languages")">
+                                <i class="material-icons">translate</i><span>@RmosCrmWebApp.Resources.HomeTexts.Diller</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Countries")">
+                                <i class="material-icons">public</i> <span>@RmosCrmWebApp.Resources.HomeTexts.Ülkeler</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- #region Multi Level -->
+
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">trending_down</i>
+                        <span>Multi Level Menu (Not Support)</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span>Menu Item</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span>Menu Item - 2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- #endregion -->
+            </ul>
+        </div>
+        <!-- #Menu -->
+        <!-- Footer -->
+        <!-- #region <!--FooterForLaterUse--!> -->
+        @*<div class="legal">
+                <div class="copyright">
+                    &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.5
+                </div>
+            </div>*@
+
+        <!-- #endregion -->
+        <!-- #Footer -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+</section>
+
+

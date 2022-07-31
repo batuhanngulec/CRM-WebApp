@@ -1,0 +1,70 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.Ulkeler
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Input -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <div class="card">
+            <div class="header">
+                <h2>
+                    ÜLKE DÜZENLE
+                    <small>Mevcut Ülkeyi Düzenle</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken();
+                            @Html.HiddenFor(model => model.UlkeID)
+
+
+                            <div class="form-group">
+                                <label class="control-label">Ülke Kodu:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.UlkeKod, new { htmlAttributes = new { @class = "form-control", required = "required", maxlength = "50" } })
+                                    @Html.ValidationMessageFor(model => model.UlkeKod, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+
+                                    <label class="control-label">Ülke Adı:</label>
+                                    @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control", required = "required", maxlength = "50" } })
+                                    @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="checkbox">
+                                    <input type="checkbox" id="isActive" name="isActive" value="true" @(Model.Aktiflik == true ? "checked" : "") />
+                                    <label for="isActive">Aktiflik</label>
+                                    @Html.ValidationMessageFor(model => model.Aktiflik, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" value="Kaydet" class="btn btn-primary" />
+                                    @Html.ActionLink("Geri Dön", "Index")
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.result != null)
+                    {
+                        <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@(ViewBag.result[1])</span></h2>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Input -->

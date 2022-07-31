@@ -1,0 +1,79 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.Departmanlar
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Input -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    YENİ DEPARTMAN
+                    <small>Oluştur</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm("Create", "Departments", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label class="control-label">Departman Kodu:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.DepartmanKod, new { htmlAttributes = new { @class = "form-control", required = "required", maxlength = "50" } })
+                                    @Html.ValidationMessageFor(model => model.DepartmanKod, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <label class="control-label">Departman Adı:</label>
+                                    @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control", required = "required", maxlength = "50" } })
+                                    @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>   
+                            
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <label class="control-label">Anket Sırası:</label>
+                                    @Html.EditorFor(model => model.AnketSirasi, new { htmlAttributes = new { @class = " form-control", required = "required",min="1"   } })
+                                    @Html.ValidationMessageFor(model => model.AnketSirasi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>        
+                            
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <label class="control-label">Şube:</label>
+                                    @Html.DropDownListFor(model => model.SubeID,(SelectList)ViewBag.SubeID, new { @class = "form-control", required = "required"  })
+                                    @Html.ValidationMessageFor(model => model.SubeID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="checkbox">
+                                    <input type="checkbox" id="isActive" name="isActive" value="true" />
+                                    <label for="isActive">Aktiflik</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" value="Oluştur" class="btn btn-primary" />
+                                    @Html.ActionLink("Geri Dön", "Index")
+                                </div>
+                            </div>
+                        }
+                    </div>
+                @if (ViewBag.result != null)
+                {
+                    <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@(ViewBag.result[1])</span></h2>
+                }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- #END# Input -->

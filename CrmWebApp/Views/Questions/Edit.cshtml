@@ -1,0 +1,88 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.Sorular
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h4 align="center">
+                    GÜNCELLEME İŞLEMİ
+                </h4>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm("Edit", "Questions", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                <label for="siraid" class="control-label">Sıra ID:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.SiraID, new { htmlAttributes = new { @class = "form-control", required = "required", min = "1" } })
+                                    @Html.ValidationMessageFor(model => model.SiraID, "", new { @class = "text-danger" })
+                                </div>
+                                
+                                <label for="sorukod" class="control-label">Soru Kodu:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.SoruKod, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.SoruKod, "", new { @class = "text-danger" })
+                                </div>
+                                
+                                <label for="sorukod" class="control-label">Cevap Set:</label>
+                                <div class="form-line">
+                                    @Html.DropDownListFor(model => model.CevapSetID, (SelectList)ViewBag.CevapSet, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.CevapSetID, "", new { @class = "text-danger" })
+                                </div>
+                                <hr />                               
+                                <label for="siraid" class="control-label"><h4>Soru Koduna Karşılık Gelen Dilleri Yazınız:</h4></label>
+                                <br />
+                                @foreach (var element in (SelectList)ViewBag.Translates)
+                                {
+                                    <label class="control-label">@element.Text:</label>
+                                    <input type="hidden" name="dil" value="@element.Value" />
+                                    <div class="form-line">
+                                        <input class="form-control text-box single-line" id="Dil" name="ceviri" type="text" value="" required placeholder="Buraya Yazın.."/>
+                                    </div>
+                                }
+                                <br />
+                                @*@foreach (var ceviri in (IEnumerable<RmosCrmWebApp.Models.EntityClasses.SoruCevirileri>)ViewBag.CeviriID)
+                                {
+
+                                    <label class="control-label">@ceviri.DilID:</label>
+                                    <input type="hidden" name="dil" value="@ceviri.CeviriID" />
+
+                                    <div class="form-line">
+                                        <input class="form-control text-box single-line" id="Dil" name="ceviri" type="text" value="@ceviri.Ad" required placeholder="Buraya Yazın.." />
+                                    </div>
+                                }*@
+                                <div class="form-line">
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="isActive" name="isActive" value="true" />
+                                        <label for="isActive">Aktiflik</label>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-line">
+                                    <div>
+                                        <input type="submit" value="Oluştur" class="btn btn-primary" />
+                                        @Html.ActionLink("Geri Dön", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (ViewBag.result != null)
+                        {
+                            <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@(ViewBag.result[1])</span></h2>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

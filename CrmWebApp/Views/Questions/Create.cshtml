@@ -1,0 +1,90 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.Sorular
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    YENİ SORU
+                    <small>Oluştur</small>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <label for="sorukod" class="control-label">Soru Kodu:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.SoruKod, new { htmlAttributes = new { @class = "form-control" , required="required"} })
+                                    @Html.ValidationMessageFor(model => model.SoruKod, "", new { @class = "text-danger" })
+                                </div>      
+                                <br />
+                                
+                                
+                                <label for="siraid" class="control-label">Anket Sıra ID:</label>
+                                <div class="form-line">
+                                    @Html.EditorFor(model => model.SiraID, new { htmlAttributes = new {@placeholder ="Lütfen Anket Sırasını Takip Ediniz", @class = "form-control" , required="required",min="1"} })
+                                    @Html.ValidationMessageFor(model => model.SiraID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                
+
+                                <label class="control-label">Cevap Set:</label>
+                                <div class="form-line">
+                                    @Html.DropDownListFor(model => model.CevapSetID, (SelectList)ViewBag.CevapSet, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.CevapSetID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                
+                                
+                                <div class="form-line">
+                                    @foreach (var item in (SelectList)ViewBag.Translates)
+                                    {
+                                        <label class="control-label">@item.Text:</label>
+                                        <input type="hidden" name="dil" value="@item.Value" />
+                                        <input class="form-control text-box single-line" id="Dil" name="ceviri" type="text" value="" required placeholder="Buraya Yazınız.." />
+
+                                    }
+                                </div>
+                                
+                                <br />
+
+
+                                <div class="form-line">
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="isActive" name="isActive" value="true" />
+                                        <label for="isActive">Aktiflik</label>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="form-line">
+                                    <div>
+                                        <input type="submit" value="Oluştur" class="btn btn-primary" />
+                                        @Html.ActionLink("Geri Dön", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (ViewBag.result != null)
+                        {
+                            <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@(ViewBag.result[1])</span></h2>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.AnketForm>
+
+@{
+    SelectList anketler = ViewBag.Anketler as SelectList;
+    SelectList departmanadi = ViewBag.DepartmanAdi as SelectList;
+    SelectList cevapsetkod = ViewBag.CevapSetKod as SelectList;
+    SelectList sorukod = ViewBag.SoruKod as SelectList;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div id="alert_area"></div>        
+            <div class="body">
+                <h3>@RmosCrmWebApp.Resources.HomeTexts.Anket_Listesi</h3>
+                <br />
+                
+                <div class="table table-hover">
+                    <h5>@RmosCrmWebApp.Resources.HomeTexts.Yeni_Anketi_Buradan_Oluşturabilirsiniz</h5>
+                    <a href="@Url.Action("BatuhanDenemeCreate","Surveys")" class="btn btn-success btn-circle  waves-effect waves-circle waves-float"><i class="material-icons">add</i></a>
+                    <br />
+                </div>
+                <br />
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Anket_Adı:</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Departman_Adı:</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Cevap_Setleri:</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Soru_Tipleri</th>
+                            <th>Güncelleme İşlemi:</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Silme_İşlemi:</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>                                
+                                <td class="col-sm-2">@(anketler.FirstOrDefault(x => x.Value == item.AnketID.ToString()).Text)</td>
+                                <td class="col-sm-2">@(departmanadi.FirstOrDefault(x => x.Value == item.DepartmanID.ToString()).Text)</td>
+                                <td class="col-sm-2">@(cevapsetkod.FirstOrDefault(x => x.Value == item.CevapSetID.ToString()).Text)</td>
+                                <td class="col-sm-2">@(sorukod.FirstOrDefault(x => x.Value == item.SoruID.ToString()).Text)</td> 
+                                <td class="col-sm-2"><a href="@Url.Action("BatuhanDenemeEdit","Surveys",new {id= item.AnketFormID })" class="btn btn-warning btn-circle waves-effect waves-circle waves-float"><i class="material-icons">edit</i></a></td>
+                                                                                            
+                                <td class="col-sm-1"><a href="@Url.Action("BatuhanDenemeDelete","Surveys",new {id= item.AnketFormID })" onclick="return confirm('Seçtiğiniz öğe silinecek! Emin misiniz?')" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>        
+    </div>    
+</div>
+
+
+
+

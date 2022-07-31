@@ -1,0 +1,233 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.Diller>
+@{
+    RmosCrmWebApp.Models.EntityClasses.Diller create = new RmosCrmWebApp.Models.EntityClasses.Diller();
+    RmosCrmWebApp.Models.EntityClasses.Diller edit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div id="alert_area"></div>
+                    <div class="header">
+                        <h2 class="col-sm-11">
+                            DİLLER
+                            <small>Program Dilleri</small>@*<button onclick="SuccessAlert()">adşlf</button>*@
+                        </h2>
+                        <h2 class="col-sm-1">
+                            <button type="button" class="btn btn-success btn-circle  waves-effect waves-circle waves-float" data-toggle="modal" data-target="#create-modal"><i class="material-icons">add</i></button>
+                            @*<button type="button" class="btn btn-success btn-circle  waves-effect waves-circle waves-float" onclick="location.reload();"><i class="material-icons">refresh</i></button>*@
+                        </h2>
+                        <hr />
+                        <h4>@ViewBag.notificationCreate</h4>
+                    </div>
+                    <div class="body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Dil Kodu</th>
+                                    <th>Dil Adı</th>
+                                    <th>Aktiflik</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var lang in Model)
+                                {
+                                    <tr>
+                                        <td class="col-sm-6">@lang.DilKod</td>
+                                        <td class="col-sm-6">@lang.Ad</td>
+                                        <td class="col-sm-6">@(lang.Aktiflik==true?"Aktif":"Pasif")</td>
+                                        <td class="col-sm-6"><button type="button" onclick="GetLang('@(lang.DilKod)')" data-toggle="modal" data-target="#edit-modal" class="btn btn-warning btn-circle waves-effect waves-circle waves-float"><i class="material-icons">edit</i></button></td>
+                                        <td class="col-sm-6"><button data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-circle waves-effect waves-circle waves-float" onclick="DeleteConfirm('@(lang.DilID)','@lang.DilKod')"><i class="material-icons">delete</i></button></td>
+                                        @*<td class="col-sm-6"><a href="@Url.Action("Delete","Languages",new {code = lang.DilID})" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>*@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Create -->
+    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Yeni Oluştur</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Create", "Languages", FormMethod.Post))
+                    {
+                        <label for="email_address">Dil Kodu</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" name="code" id="c_code" class="form-control" placeholder="Örnek: TR" required>
+                            </div>
+                        </div>
+                        <label for="password">Dil Adı</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" name="name" id="c_name" class="form-control" placeholder="Örnek: Türkçe" required>
+                            </div>
+                        </div>
+                        <input type="checkbox" id="c_isActive" name="isActive" class="filled-in" value="true">
+                        <label for="c_isActive">Aktiflik</label>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-link waves-effect" id="create-lang">Sisteme Kaydet</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Kapat</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit -->
+
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Düzenle</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Edit", "Languages", FormMethod.Post))
+                    {
+                        <label for="email_address">Dil Kodu</label>
+                        <input type="hidden" name="id" id="e_id" value="" />
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" name="code" id="e_code" class="form-control" placeholder="Örnek: TR" required>
+                            </div>
+                        </div>
+                        <label for="password">Dil Adı</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="text" name="name" id="e_name" class="form-control" placeholder="Örnek: Türkçe" required>
+                            </div>
+                        </div>
+                        <input type="checkbox" id="e_isActive" name="isActive" class="filled-in" value="true">
+                        <label for="e_isActive">Aktiflik</label>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-link waves-effect" id="create-lang">Düzenlemeyi Kaydet</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Kapat</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Confirm Delete-->
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="del_code">
+                    Uyarı! <strong id="d_code"></strong> Dili silinecek!
+                </div>
+                <div class="modal-body">
+                    Silmek istediğinize emin misiniz?<strong hidden id="d_id"></strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                    <button onclick="DeleteLang()" class="btn btn-danger btn-ok" data-dismiss="modal">Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts{
+    <script>
+
+        
+    </script>
+    <script>
+
+        function SuccessAlert() {
+            const mes = document.createElement("div");
+            mes.className = "alert bg-green alert-dismissible";
+            mes.innerHTML = "Başarılı.";
+            /*        element.setAttribute("role", "alert");*/
+            const close = document.createElement("button");
+            close.className = "close";
+            close.setAttribute("type", "button");
+            close.setAttribute("data-dismiss", "alert");
+            close.setAttribute("aria-label", "Close");
+            const closeIcon = document.createElement("span");
+            closeIcon.setAttribute("aria-hidden", true);
+            closeIcon.innerHTML = "×";
+
+            close.appendChild(closeIcon);
+            mes.appendChild(close);
+            document.getElementById("alert_area").appendChild(mes);
+        }
+    </script>
+    <!--NEW SYSTEM-->
+    <script>
+        //!CREATE
+        //function CreateLang() {
+        //    var code = $("#c_code").val();
+        //    var name = $("#c_name").val();
+        //    var isActive = $("#c_isActive").val();
+        //    $.ajax({
+        //        url: "/Languages/Create/",
+        //        method: "GET",
+        //        dataType: "json",
+        //        async: false,
+        //        data: { code, name, isActive },
+        //        success: function (data) {
+        //            alert(data);
+        //            $("#c_code").val("");
+        //            $("#c_name").val("");
+        //            $("#c_isActive").attr("checked", false);
+        //            location.reload();
+        //        },
+        //        error: function (data) {
+        //            alert("Başarısız.");
+        //            $("#c_code").val("");
+        //            $("#c_name").val("");
+        //            $("#c_isActive").attr("checked", false);
+        //        }
+        //    });
+        //}
+        //CREATE
+
+        function DeleteConfirm(DilID, DilKod) {
+            $("#d_code").html(DilKod);
+            $("#d_id").html(DilID);
+        }
+
+        function DeleteLang() {
+            var id = $("#d_id").html();
+            $.ajax({
+                url: "/Languages/Delete/",
+                method: "POST",
+                data: { id },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function () {
+                }
+            });
+        }
+         
+        function GetLang(DilKod) {
+            var code = DilKod;
+            $.ajax({
+                url: "Languages/Read/",
+                data: { code },
+                success: function (data) {
+                    $("#e_id").val(data.DilID);
+                    $("#e_code").val(data.DilKod);
+                    $("#e_name").val(data.Ad);
+                    $("#e_isActive").prop("checked", data.Aktiflik);
+                },
+                error: function () {
+                    alert("hata");
+                }
+            })
+        }
+    </script>
+}

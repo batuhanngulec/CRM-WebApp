@@ -1,0 +1,68 @@
+﻿@model RmosCrmWebApp.Models.EntityClasses.AnketKayit
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Anket Cevap Girişi
+                    
+                    <small>Müşteri oda numarası, ad soyad, dil seçeneği eklenecek !!!</small>
+                    <small>Müşteri oda numarası, ad soyad, dil seçeneği eklenecek !!!</small>
+                  
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        @using (Html.BeginForm("ResepsiyonAnketDoldurmaCreate", "SurveyRecords", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                <label class="control-label">Anket Adı:</label>
+                                <div class="form-line">
+                                    @Html.DropDownListFor(model => model.AnketID, (SelectList)ViewBag.AnketAd, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.AnketID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+
+                                <label class="control-label">Soru Kod:</label>
+                                <div class="form-line">
+                                    @Html.DropDownListFor(model => model.SoruID, (SelectList)ViewBag.SoruKod, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.SoruID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+
+                                <label class="control-label">Cevap Kod:</label>
+                                <div class="form-line">
+                                    @Html.DropDownListFor(model => model.CevapID, (SelectList)ViewBag.CevapKod, new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.CevapID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+
+
+                                <div class="form-line">
+                                    <div>
+                                        <input type="submit" value="Oluştur" class="btn btn-primary" />
+                                        @Html.ActionLink("Geri Dön", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (ViewBag.result != null)
+                        {
+                            <h2><span class="label label-@(ViewBag.result[0]) col-sm-12">@(ViewBag.result[1])</span></h2>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

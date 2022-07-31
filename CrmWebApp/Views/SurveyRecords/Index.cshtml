@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RmosCrmWebApp.Models.EntityClasses.AnketKayit>
+
+@{
+    SelectList AnketAd = ViewBag.AnketAd as SelectList;
+    SelectList SoruKod = ViewBag.SoruKod as SelectList;
+    SelectList CevapKod = ViewBag.CevapKod as SelectList;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div id="alert_area"></div>
+            <div class="body">
+                <div class="col-sm-12">
+                    <h3>@RmosCrmWebApp.Resources.HomeTexts.Resepsiyon_Manuel_Anket_Cevap_Giriş</h3>
+                    <br />
+                    <h4>Müşteri Oda Numarası (not supported yet) ??</h4>
+                    <h4>Müşteri Adı Soyadı (not supported yet) ?? </h4>
+                    <br />
+                    <br />
+                </div>
+                <div class="col-sm-12">
+                    <h3>@RmosCrmWebApp.Resources.HomeTexts.Anket_Cevap_Girişini_Buradan_Ekleyebilirsiniz</h3>
+                    <a href="@Url.Action("ResepsiyonAnketDoldurmaCreate","SurveyRecords")" class="btn btn-success btn-circle  waves-effect waves-circle waves-float"><i class="material-icons">add</i></a>
+                    <br />
+                </div>
+                <br />
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Anket_Adı</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Soru_Kodu</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.CevapKod</th>
+                            <th>@RmosCrmWebApp.Resources.HomeTexts.Cevap_Silme</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="col-sm-2">@(AnketAd.FirstOrDefault(x => x.Value == item.AnketID.ToString()).Text)</td>
+                                <td class="col-sm-2">@(SoruKod.FirstOrDefault(x => x.Value == item.SoruID.ToString()).Text)</td>
+                                <td class="col-sm-2">@(CevapKod.FirstOrDefault(x => x.Value == item.CevapID.ToString()).Text)</td>
+                                
+                                <td class="col-sm-1"><a href="@Url.Action("ResepsiyonAnketDoldurmaDelete","SurveyRecords",new {id= item.AnketKayitID })" onclick="return confirm('Seçtiğiniz öğe silinecek! Emin misiniz?')" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
